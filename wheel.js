@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (formText) formText.style.display = 'none';
 
             prizeText.innerHTML = 'Pack 1\u00E8re page Google'
-                + '<span class="prize-note">35\u20AC/mois au lieu de <s>156\u20AC/mois</s> \u2022 Sans engagement</span>';
+                + '<span class="prize-note">174\u20AC/mois \u2022 Sans engagement</span>';
 
             var offerList = document.createElement('div');
             offerList.style.cssText = 'text-align:left;margin:15px 0;font-size:0.85rem;line-height:1.8;color:#d1d5db;';
@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function () {
             wheelForm.appendChild(callMsg);
 
             var stripeBtn = document.createElement('a');
-            stripeBtn.href = 'https://buy.stripe.com/4gM5kEbia2Qm58FfDDgYU0b';
+            stripeBtn.href = 'https://buy.stripe.com/dRm4gAdqifD8bx3633gYU04';
             stripeBtn.target = '_blank';
             stripeBtn.className = 'wheel-submit-btn';
             stripeBtn.textContent = 'Souscrire maintenant';
