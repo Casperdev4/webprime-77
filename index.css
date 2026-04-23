@@ -272,6 +272,10 @@ body::before {
   margin-top: 44px;
   opacity: 0;
   animation: fadeUp 1s ease 1.5s forwards;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .cta {
