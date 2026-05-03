@@ -817,30 +817,32 @@
                 var prenom = fd.get('prenom') || '';
                 var entreprise = fd.get('entreprise') || '';
 
-                var messageParts = [];
-                messageParts.push('Site existant: ' + (fd.get('site_existant') || 'Non renseign\u00e9'));
-                if (fd.get('url_site')) messageParts.push('URL: ' + fd.get('url_site'));
-                if (fd.get('position_google')) messageParts.push('Position Google: ' + fd.get('position_google'));
-                messageParts.push('Type de site: ' + (fd.get('type_site') || 'Non renseign\u00e9'));
-                messageParts.push('Objectif: ' + (fd.getAll('objectif').join(', ') || 'Non renseign\u00e9'));
-                messageParts.push('Secteur: ' + (fd.get('secteur') || 'Non renseign\u00e9'));
-                messageParts.push('M\u00e9tier: ' + (fd.get('metier') || 'Non renseign\u00e9'));
-                messageParts.push('Anciennet\u00e9: ' + (fd.getAll('anciennete').join(', ') || 'Non renseign\u00e9'));
-                messageParts.push('Source clients: ' + (fd.getAll('source_clients').join(', ') || 'Non renseign\u00e9'));
-                messageParts.push('Clients/mois: ' + (fd.get('clients_mois') || 'Non renseign\u00e9'));
-                messageParts.push('Situation: ' + (fd.getAll('situation').join(', ') || 'Non renseign\u00e9'));
-                messageParts.push('T\u00e9l\u00e9phone: ' + (fd.get('telephone') || 'Non renseign\u00e9'));
-                if (fd.get('commentaires')) messageParts.push('Commentaires: ' + fd.get('commentaires'));
-
                 var payload = new FormData();
-                payload.append('name', prenom + (entreprise ? ' - ' + entreprise : ''));
-                payload.append('email', fd.get('email'));
-                payload.append('telephone', fd.get('telephone') || '');
-                payload.append('message', messageParts.join('\n'));
+                payload.append('Pr\u00e9nom', prenom);
+                payload.append('Entreprise', entreprise);
+                payload.append('Email', fd.get('email') || '');
+                payload.append('T\u00e9l\u00e9phone', fd.get('telephone') || '');
+                payload.append('Site existant', fd.get('site_existant') || 'Non renseign\u00e9');
+                if (fd.get('url_site')) payload.append('URL du site', fd.get('url_site'));
+                if (fd.get('position_google')) payload.append('Position Google', fd.get('position_google'));
+                payload.append('Type de site', fd.get('type_site') || 'Non renseign\u00e9');
+                payload.append('Objectif', fd.getAll('objectif').join(', ') || 'Non renseign\u00e9');
+                payload.append('Secteur', fd.get('secteur') || 'Non renseign\u00e9');
+                payload.append('M\u00e9tier', fd.get('metier') || 'Non renseign\u00e9');
+                payload.append('Anciennet\u00e9', fd.getAll('anciennete').join(', ') || 'Non renseign\u00e9');
+                payload.append('Source clients', fd.getAll('source_clients').join(', ') || 'Non renseign\u00e9');
+                payload.append('Clients par mois', fd.get('clients_mois') || 'Non renseign\u00e9');
+                payload.append('Situation', fd.getAll('situation').join(', ') || 'Non renseign\u00e9');
+                if (fd.get('commentaires')) payload.append('Commentaires', fd.get('commentaires'));
 
-                var response = await fetch('https://webprime.app/webhook/contact/6b0fb099dde5949c91782c081d3ad394d5b472218f280b4fa21cb700c8cd6dd4', {
+                payload.append('_subject', 'Nouvelle demande WebPrime 77 - ' + (entreprise || prenom));
+                payload.append('_template', 'table');
+                payload.append('_captcha', 'false');
+
+                var response = await fetch('https://formsubmit.co/ajax/contact@webprime.fr', {
                     method: 'POST',
-                    body: payload
+                    body: payload,
+                    headers: { 'Accept': 'application/json' }
                 });
 
                 if (response.ok) {
